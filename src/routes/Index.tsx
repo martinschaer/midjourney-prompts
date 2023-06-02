@@ -21,6 +21,7 @@ function App() {
     () =>
       [subject, details, style, params, quality]
         .filter(x => x.trim().length)
+        .map(x => x.trim())
         .join(', '),
     [subject, details, style, params, quality],
   )
