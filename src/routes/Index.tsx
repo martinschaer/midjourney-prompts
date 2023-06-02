@@ -6,14 +6,21 @@ function App() {
   const subject = usePromptStore(state => state.subject)
   const details = usePromptStore(state => state.details)
   const style = usePromptStore(state => state.style)
+  const params = usePromptStore(state => state.params)
+  const quality = usePromptStore(state => state.quality)
 
   const subjectSet = usePromptStore(state => state.subjectSet)
   const detailsSet = usePromptStore(state => state.detailsSet)
   const styleSet = usePromptStore(state => state.styleSet)
+  const paramsSet = usePromptStore(state => state.paramsSet)
+  const qualitySet = usePromptStore(state => state.qualitySet)
 
   const prompt = useMemo(
-    () => [subject, details, style].filter(x => x.trim().length).join(', '),
-    [subject, details, style],
+    () =>
+      [subject, details, style, params, quality]
+        .filter(x => x.trim().length)
+        .join(', '),
+    [subject, details, style, params, quality],
   )
 
   return (
@@ -33,6 +40,16 @@ function App() {
         label="Style"
         value={style}
         handleChange={styleSet}
+      />
+      <PromptComponentInput
+        label="Parameters"
+        value={params}
+        handleChange={paramsSet}
+      />
+      <PromptComponentInput
+        label="Quality"
+        value={quality}
+        handleChange={qualitySet}
       />
       <div>{prompt}</div>
     </div>
