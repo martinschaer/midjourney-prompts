@@ -14,15 +14,16 @@ const PromptComponentInput: FC<IPromptComponentInputProps> = ({
 }) => {
   const inputIdRef = useRef(miniId())
   return (
-    <>
+    <div className="flex flex-col">
       <label htmlFor={inputIdRef.current}>{label}</label>
       <input
         id={inputIdRef.current}
         type="text"
         value={value}
         onChange={evt => handleChange(evt.target.value)}
+        className="rounded border shadow-inner"
       />
-    </>
+    </div>
   )
 }
 

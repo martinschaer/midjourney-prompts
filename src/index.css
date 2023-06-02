@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+  @apply rounded border border-gray-200 bg-white px-2 py-1;
+  @apply hover:border-gray-300 active:shadow-inner active:ring;
+}
+
+.tooltip {
+  --tooltip-arrow-height: 0.5rem;
+  @apply absolute z-10 rounded bg-gray-900 px-1 text-white;
+  transform: translateX(50%)
+    translateY(calc(-100% - var(--tooltip-arrow-height)));
+}
+
+.tooltip:after {
+  @apply border-gray-900;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-width: var(--tooltip-arrow-height);
+  bottom: calc(-2 * var(--tooltip-arrow-height));
+  content: '';
+  height: 0;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 0;
+}
