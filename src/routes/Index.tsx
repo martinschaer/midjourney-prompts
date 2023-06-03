@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="container mx-auto flex flex-col gap-8 pb-70">
+      <div className="container mx-auto flex flex-col gap-8 pb-80">
         <div className="card mt-8 flex flex-wrap justify-between gap-8">
           <PromptComponentInput
             className="flex-grow"
@@ -113,7 +113,7 @@ function App() {
         </div>
       </div>
       <div className="card fixed bottom-0 left-0 flex w-screen items-center gap-4 backdrop-blur">
-        <span className="mr-2">/imagine</span>
+        <span className="absolute left-9 top-1">/imagine</span>
         <span className="rounded bg-black px-4 py-2 text-3xl text-white">
           {prompt}
         </span>
