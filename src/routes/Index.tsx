@@ -53,19 +53,22 @@ function App() {
         <div className="card mt-8 flex flex-wrap justify-between gap-8">
           <PromptComponentInput
             className="flex-grow"
+            helpText="Examples: a botanical-bearded fairy prince, flowing hair, sky-eyes, symmetrical mossy antlers, intensely sad gaze, wearing a floral diadem"
             label="Subject"
             value={subject}
             onChange={subjectSet}
           />
           <PromptComponentInput
             className="flex-grow"
+            helpText="Examples: magical details, twilight atmosphere"
             label="Details & Surroundings"
             value={details}
             onChange={detailsSet}
           />
           <PromptComponentInput
             className="flex-grow"
-            label="Style"
+            label="Stylizations, Media Type, Artists"
+            helpText="Examples: in the style of ArtGerm, Alyssa Monks, Studio Ghibli, close-up, glamour shot"
             value={style}
             onChange={styleSet}
           />

@@ -8,10 +8,12 @@ import {
   useRef,
   useState,
 } from 'react'
+import { Popover } from '@headlessui/react'
 import { miniId } from '../utils/mini-id'
 
 export interface IPromptComponentInputProps {
   className?: string
+  helpText?: string
   label: string
   value: string
   onChange: (value: string) => void
@@ -21,6 +23,7 @@ const split = (x: string) => x.split(',')
 
 const PromptComponentInput: FC<IPromptComponentInputProps> = ({
   className,
+  helpText,
   label,
   value,
   onChange,
@@ -96,10 +99,33 @@ const PromptComponentInput: FC<IPromptComponentInputProps> = ({
   }, [currIndex, inputCount.length, value])
 
   return (
-    <div className={`card ${className}`}>
-      <label htmlFor={inputIdRef.current + 0} className="text-xl block mb-2">
+    <div className={`card relative ${className}`}>
+      <label htmlFor={inputIdRef.current + 0} className="mb-2 block text-xl">
         {label}
       </label>
+
+      {helpText && (
+        <Popover className="absolute right-8 top-8">
+          <Popover.Button className="text-gray-600 transition-colors hover:text-gray-400">
+            Help
+          </Popover.Button>
+
+          <Popover.Panel className="card card--popover absolute right-0 top-4 w-96 max-w-prose">
+            {({ close }) => (
+              <>
+                {helpText}
+                <div
+                  className="button absolute right-2 top-2 text-sm"
+                  onClick={() => close()}
+                >
+                  ✕
+                </div>
+              </>
+            )}
+          </Popover.Panel>
+        </Popover>
+      )}
+
       <div className="flex flex-col">
         {inputCount.map((_val, i) => (
           <input
