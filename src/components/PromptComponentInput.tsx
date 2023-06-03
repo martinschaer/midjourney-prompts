@@ -32,7 +32,11 @@ const PromptComponentInput: FC<IPromptComponentInputProps> = ({
   const inputsRef = useRef<Ref<HTMLInputElement>[]>([])
   const [currIndex, currIndexSet] = useState(0)
   const splitValues = useRef(split(value))
-  const [inputCount, inputCountSet] = useState([true])
+  const [inputCount, inputCountSet] = useState(
+    Array(
+      splitValues.current.length + (splitValues.current.at(-1) ? 1 : 0),
+    ).fill(true),
+  )
 
   const cleanUpAndFocus = useCallback(() => {
     // remove inputs if more than one is empty
