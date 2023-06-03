@@ -32,7 +32,7 @@ const PromptComponentFlags: FC<IPromptComponentFlagsProps> = ({
   )
   return (
     <div className={`card ${className}`}>
-      <span className="mb-2 block text-xl">{label}</span>
+      <span className="mb-2 block cursor-default text-xl">{label}</span>
       {options.map((option, i) => (
         <Switch
           key={option.label}
@@ -42,7 +42,7 @@ const PromptComponentFlags: FC<IPromptComponentFlagsProps> = ({
         >
           <div
             className={`${
-              enabled[i] ? 'bg-blue-600' : 'bg-gray-200'
+              enabled[i] ? 'bg-blue-700' : 'bg-gray-800'
             } relative inline-flex h-6 w-11 items-center rounded-full`}
           >
             <span
