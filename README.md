@@ -1,6 +1,6 @@
 # Midjourney Prompts
 
-# To-do
+## To-do
 
 - save previously used component values
 - autocomplete previously used component values
@@ -9,7 +9,7 @@
 - group saved prompts in projects
 - attach generated image URLs to saved prompts
 
-# Project initialization
+## Project initialization
 
 ```bash
 # init project using vite
@@ -43,4 +43,13 @@ pnpm add @tanstack/react-query
 # install router (note: tanstack router is in beta, you may want to use another router)
 pnpm add @tanstack/router@beta
 
+```
+
+## Build and deploy
+
+Deploying on Github Pages. Build script is in [./.github/workflows/main.yml](./.github/workflows/main.yml).
+
+```bash
+# generate npm lock file for Github Pages
+npm i --package-lock-only
 ```
