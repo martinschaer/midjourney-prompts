@@ -4,7 +4,9 @@ export type PromptState = {
   subject: string
   details: string
   style: string
-  params: string
+  aspectRatio: string
+  options: string
+  optionStyle: string
   quality: string
 }
 
@@ -12,7 +14,9 @@ type Actions = {
   subjectSet: (subject: string) => void
   detailsSet: (details: string) => void
   styleSet: (style: string) => void
-  paramsSet: (params: string) => void
+  aspectRatioSet: (aspectRatio: string) => void
+  optionsSet: (options: string) => void
+  optionStyleSet: (optionStyle: string) => void
   qualitySet: (quality: string) => void
 }
 
@@ -20,12 +24,16 @@ export const usePromptStore = create<PromptState & Actions>(set => ({
   subject: '',
   details: '',
   style: '',
-  params: '',
+  aspectRatio: '',
+  options: '',
+  optionStyle: '',
   quality: '',
 
   subjectSet: subject => set({ subject }),
   detailsSet: details => set({ details }),
   styleSet: style => set({ style }),
-  paramsSet: params => set({ params }),
+  aspectRatioSet: aspectRatio => set({ aspectRatio }),
+  optionsSet: options => set({ options }),
+  optionStyleSet: optionStyle => set({ optionStyle }),
   qualitySet: quality => set({ quality }),
 }))

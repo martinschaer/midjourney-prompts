@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { miniId } from '../utils/mini-id'
 
-interface IPromptComponentInputProps {
+export interface IPromptComponentInputProps {
   className?: string
   label: string
   value: string

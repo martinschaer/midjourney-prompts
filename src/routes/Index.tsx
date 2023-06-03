@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import PromptComponentInput from '../components/PromptComponentInput'
+import PromptComponentSelect from '../components/PromptComponentSelect'
 import { usePromptStore } from '../stores/prompt'
+import PromptComponentFlags from '../components/PromptComponentFlags'
 
 function App() {
   const [clipboardNotice, clipboardNoticeSet] = useState<string | null>(null)
@@ -8,22 +10,26 @@ function App() {
   const subject = usePromptStore(state => state.subject)
   const details = usePromptStore(state => state.details)
   const style = usePromptStore(state => state.style)
-  const params = usePromptStore(state => state.params)
+  const aspectRatio = usePromptStore(state => state.aspectRatio)
+  const options = usePromptStore(state => state.options)
+  const optionStyle = usePromptStore(state => state.optionStyle)
   const quality = usePromptStore(state => state.quality)
 
   const subjectSet = usePromptStore(state => state.subjectSet)
   const detailsSet = usePromptStore(state => state.detailsSet)
   const styleSet = usePromptStore(state => state.styleSet)
-  const paramsSet = usePromptStore(state => state.paramsSet)
+  const aspectRatioSet = usePromptStore(state => state.aspectRatioSet)
+  const optionsSet = usePromptStore(state => state.optionsSet)
+  const optionStyleSet = usePromptStore(state => state.optionStyleSet)
   const qualitySet = usePromptStore(state => state.qualitySet)
 
   const prompt = useMemo(
     () =>
-      [subject, details, style, params, quality]
+      [subject, details, style, aspectRatio, optionStyle, options, quality]
         .filter(x => x.trim().length)
         .map(x => x.trim())
         .join(', '),
-    [subject, details, style, params, quality],
+    [subject, details, style, aspectRatio, optionStyle, options, quality],
   )
 
   const handleCopyPrompt = useCallback(() => {
@@ -43,7 +49,7 @@ function App() {
 
   return (
     <>
-      <div className="container mx-auto flex flex-col gap-8 pb-80">
+      <div className="container mx-auto flex flex-col gap-8 pb-70">
         <div className="card mt-8 flex flex-wrap justify-between gap-8">
           <PromptComponentInput
             className="flex-grow"
@@ -63,16 +69,46 @@ function App() {
             value={style}
             onChange={styleSet}
           />
-          <PromptComponentInput
+          <PromptComponentSelect
             className="flex-grow"
-            label="Parameters"
-            value={params}
-            onChange={paramsSet}
+            label="Aspect Ratio"
+            value={aspectRatio}
+            onChange={aspectRatioSet}
+            options={[
+              { label: '1:1', value: '' },
+              { label: '16:9', value: '--ar 16:9' },
+              { label: '4:3', value: '--ar 4:3' },
+              { label: '9:16', value: '--ar 9:16' },
+            ]}
           />
-          <PromptComponentInput
+          <PromptComponentSelect
+            className="flex-grow"
+            label="Style"
+            value={optionStyle}
+            onChange={optionStyleSet}
+            options={[
+              { label: '250', value: '--s 250' },
+              { label: '500', value: '--s 500' },
+              { label: '750', value: '--s 750' },
+              { label: '1000', value: '--s 1000' },
+            ]}
+          />
+          <PromptComponentSelect
             label="Quality"
             value={quality}
             onChange={qualitySet}
+            options={[
+              { label: 'high', value: '' },
+              { label: 'med', value: '--q 0.5 --stop 80' },
+              { label: 'low', value: '--q 0.25 --stop 50' },
+            ]}
+          />
+          <PromptComponentFlags
+            className="flex-grow"
+            label="Options"
+            value={options}
+            onChange={optionsSet}
+            options={[{ label: 'Tile Pattern', value: '--tile' }]}
           />
         </div>
       </div>
@@ -83,7 +119,7 @@ function App() {
         </span>
         <div className="relative ml-auto">
           <span
-            className={clipboardNotice ? 'tooltip right-5 top-2' : 'hidden'}
+            className={clipboardNotice ? 'tooltip right-10 top-4' : 'hidden'}
             role="tooltip"
           >
             {clipboardNotice}
@@ -91,8 +127,9 @@ function App() {
           <button
             className="button button--cta h-20 w-20 text-xl"
             onClick={handleCopyPrompt}
+            disabled={!prompt}
           >
-            📋
+            Copy
           </button>
         </div>
       </div>
