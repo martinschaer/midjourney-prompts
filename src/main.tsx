@@ -12,7 +12,7 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     {/* <QueryClientProvider client={queryClient}> */}
-    <RouterProvider router={router} />
+    <RouterProvider router={router} basepath="/midjourney-prompts" />
     {/* </QueryClientProvider> */}
   </React.StrictMode>,
 )
