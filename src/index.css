@@ -2,20 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-gray-900 text-gray-400;
+}
+
+h1,
+h2 {
+  @apply font-bold;
+}
+
+h1 {
+  @apply text-3xl;
+}
+h2 {
+  @apply text-2xl;
+}
+
+a {
+  @apply border-b border-gray-700 bg-black px-1 transition-colors;
+  @apply hover:border-gray-600 hover:bg-black/50 hover:text-gray-300;
+}
+
+.card {
+  @apply rounded-lg bg-black/30 p-8;
+}
+
 .button {
-  @apply rounded border border-gray-200 bg-white px-2 py-1;
+  @apply rounded border-2 border-gray-700 bg-black px-2 py-1 transition-colors;
   @apply hover:border-gray-300 active:shadow-inner active:ring;
+}
+
+.button--cta {
+  @apply border-blue-300 bg-blue-500;
+  @apply hover:border-blue-400 hover:bg-blue-600;
+}
+
+.input {
+  @apply rounded border border-gray-700 bg-gray-900 px-2 py-1 shadow-inner outline-none transition-colors;
+  @apply focus:border-gray-300 focus:bg-black/30 focus:text-gray-100;
 }
 
 .tooltip {
   --tooltip-arrow-height: 0.5rem;
-  @apply absolute z-10 rounded bg-gray-900 px-1 text-white;
+  @apply absolute z-10 rounded bg-black px-1 text-white;
   transform: translateX(50%)
     translateY(calc(-100% - var(--tooltip-arrow-height)));
 }
 
 .tooltip:after {
-  @apply border-gray-900;
+  @apply border-black;
   border-bottom-color: transparent;
   border-left-color: transparent;
   border-right-color: transparent;

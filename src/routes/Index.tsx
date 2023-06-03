@@ -42,53 +42,61 @@ function App() {
   }, [prompt])
 
   return (
-    <div className="container mx-auto">
-      <h1>Hello World</h1>
-      <div className="flex gap-4">
-        <PromptComponentInput
-          label="Subject"
-          value={subject}
-          handleChange={subjectSet}
-        />
-        <PromptComponentInput
-          label="Details & Surroundings"
-          value={details}
-          handleChange={detailsSet}
-        />
-        <PromptComponentInput
-          label="Style"
-          value={style}
-          handleChange={styleSet}
-        />
-        <PromptComponentInput
-          label="Parameters"
-          value={params}
-          handleChange={paramsSet}
-        />
-        <PromptComponentInput
-          label="Quality"
-          value={quality}
-          handleChange={qualitySet}
-        />
+    <>
+      <div className="container mx-auto flex flex-col gap-8 pb-80">
+        <div className="card mt-8 flex flex-wrap justify-between gap-8">
+          <PromptComponentInput
+            className="flex-grow"
+            label="Subject"
+            value={subject}
+            onChange={subjectSet}
+          />
+          <PromptComponentInput
+            className="flex-grow"
+            label="Details & Surroundings"
+            value={details}
+            onChange={detailsSet}
+          />
+          <PromptComponentInput
+            className="flex-grow"
+            label="Style"
+            value={style}
+            onChange={styleSet}
+          />
+          <PromptComponentInput
+            className="flex-grow"
+            label="Parameters"
+            value={params}
+            onChange={paramsSet}
+          />
+          <PromptComponentInput
+            label="Quality"
+            value={quality}
+            onChange={qualitySet}
+          />
+        </div>
       </div>
-      <h2 className="mt-8">Prompt:</h2>
-      <div className="relative rounded-lg bg-gray-50 p-4">
+      <div className="card fixed bottom-0 left-0 flex w-screen items-center gap-4 backdrop-blur">
         <span className="mr-2">/imagine</span>
-        <span className="rounded bg-black px-2 py-1 text-white">{prompt}</span>
-        <span
-          className={clipboardNotice ? 'tooltip right-7 top-3' : 'hidden'}
-          role="tooltip"
-        >
-          {clipboardNotice}
+        <span className="rounded bg-black px-4 py-2 text-3xl text-white">
+          {prompt}
         </span>
-        <button
-          className="button absolute right-2 top-2 h-10 w-10"
-          onClick={handleCopyPrompt}
-        >
-          📋
-        </button>
+        <div className="relative ml-auto">
+          <span
+            className={clipboardNotice ? 'tooltip right-5 top-2' : 'hidden'}
+            role="tooltip"
+          >
+            {clipboardNotice}
+          </span>
+          <button
+            className="button button--cta h-20 w-20 text-xl"
+            onClick={handleCopyPrompt}
+          >
+            📋
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
