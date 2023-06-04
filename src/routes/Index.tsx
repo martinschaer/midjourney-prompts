@@ -23,14 +23,16 @@ function App() {
   const optionStyleSet = usePromptStore(state => state.optionStyleSet)
   const qualitySet = usePromptStore(state => state.qualitySet)
 
-  const prompt = useMemo(
-    () =>
-      [subject, details, style, aspectRatio, optionStyle, options, quality]
-        .filter(x => x.trim().length)
-        .map(x => x.trim())
-        .join(', '),
-    [subject, details, style, aspectRatio, optionStyle, options, quality],
-  )
+  const prompt = useMemo(() => {
+    const commaSeparated = [subject, details, style]
+      .filter(x => x.trim().length)
+      .map(x => x.trim())
+      .join(', ')
+    const spaceSeparated = [aspectRatio, optionStyle, options, quality]
+      .map(x => x.trim())
+      .join(' ')
+    return commaSeparated + ' ' + spaceSeparated
+  }, [subject, details, style, aspectRatio, optionStyle, options, quality])
 
   const handleCopyPrompt = useCallback(() => {
     navigator.clipboard.writeText(prompt).then(
