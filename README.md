@@ -74,4 +74,3 @@ npm i @tanstack/router@beta
 ## Build and deploy
 
 Deploying on Github Pages. Build script is in [.github/workflows/main.yml](./.github/workflows/main.yml).
-

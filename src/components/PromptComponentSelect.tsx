@@ -24,7 +24,8 @@ const PromptComponentSelect: FC<IPromptComponentSelectProps> = ({
             {({ checked }) => (
               <div
                 className={
-                  'button button--rect text-2xl' + (checked ? ' button--toggled' : '')
+                  'button button--rect text-2xl' +
+                  (checked ? ' button--toggled' : '')
                 }
               >
                 {option.label}

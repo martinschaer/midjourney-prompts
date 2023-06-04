@@ -32,7 +32,7 @@ a {
 }
 
 .card--popover {
-  @apply z-10 shadow backdrop-blur border border-black ring ring-blue-500;
+  @apply z-10 border border-black shadow ring ring-blue-500 backdrop-blur;
 }
 
 .button {

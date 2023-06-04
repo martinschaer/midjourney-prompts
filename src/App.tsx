@@ -18,7 +18,7 @@ function App() {
         </div>
       </div>
       <div className="pt-8">
-      <Outlet />
+        <Outlet />
       </div>
     </>
   )
