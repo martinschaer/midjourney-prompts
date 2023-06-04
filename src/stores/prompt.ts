@@ -20,6 +20,25 @@ type Actions = {
   qualitySet: (quality: string) => void
 }
 
+export const buildPrompt = ({
+  subject,
+  details,
+  style,
+  aspectRatio,
+  optionStyle,
+  options,
+  quality,
+}: PromptState) => {
+  const commaSeparated = [subject, details, style]
+    .filter(x => x.trim().length)
+    .map(x => x.trim())
+    .join(', ')
+  const spaceSeparated = [aspectRatio, optionStyle, options, quality]
+    .map(x => x.trim())
+    .join(' ')
+  return commaSeparated + ' ' + spaceSeparated
+}
+
 export const usePromptStore = create<PromptState & Actions>(set => ({
   subject: '',
   details: '',

@@ -97,3 +97,29 @@ a {
   transform: translateX(-50%);
   width: 0;
 }
+
+.table {
+  @apply w-full table-auto border-collapse;
+}
+
+.table thead {
+  @apply sticky left-0 top-0 w-full bg-black;
+}
+
+.table thead .table__row {
+  @apply bg-black;
+}
+
+.table__row:nth-child(odd) {
+  @apply bg-gray-900;
+}
+
+.table__row {
+  @apply border-b border-gray-800;
+  @apply hover:bg-black/30;
+}
+
+.table__row td,
+th {
+  @apply px-2 text-left;
+}

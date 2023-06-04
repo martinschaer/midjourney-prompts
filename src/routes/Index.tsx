@@ -1,11 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+
 import PromptComponentInput from '../components/PromptComponentInput'
 import PromptComponentSelect from '../components/PromptComponentSelect'
-import { usePromptStore } from '../stores/prompt'
 import PromptComponentFlags from '../components/PromptComponentFlags'
+
+import { useCollectionStore } from '../stores/collection'
+import { buildPrompt, usePromptStore } from '../stores/prompt'
 
 function App() {
   const [clipboardNotice, clipboardNoticeSet] = useState<string | null>(null)
+
+  const savePrompt = useCollectionStore(state => state.addPrompt)
 
   const subject = usePromptStore(state => state.subject)
   const details = usePromptStore(state => state.details)
@@ -24,17 +29,27 @@ function App() {
   const qualitySet = usePromptStore(state => state.qualitySet)
 
   const prompt = useMemo(() => {
-    const commaSeparated = [subject, details, style]
-      .filter(x => x.trim().length)
-      .map(x => x.trim())
-      .join(', ')
-    const spaceSeparated = [aspectRatio, optionStyle, options, quality]
-      .map(x => x.trim())
-      .join(' ')
-    return commaSeparated + ' ' + spaceSeparated
+    return buildPrompt({
+      subject,
+      details,
+      style,
+      aspectRatio,
+      optionStyle,
+      options,
+      quality,
+    })
   }, [subject, details, style, aspectRatio, optionStyle, options, quality])
 
-  const handleCopyPrompt = useCallback(() => {
+  const handleSaveCopyPrompt = useCallback(() => {
+    savePrompt({
+      aspectRatio,
+      details,
+      optionStyle,
+      options,
+      quality,
+      style,
+      subject,
+    })
     navigator.clipboard.writeText(prompt).then(
       () => {
         clipboardNoticeSet('copied!')
@@ -43,7 +58,17 @@ function App() {
         clipboardNoticeSet("couldn't copy")
       },
     )
-  }, [prompt])
+  }, [
+    aspectRatio,
+    details,
+    optionStyle,
+    options,
+    prompt,
+    quality,
+    savePrompt,
+    style,
+    subject,
+  ])
 
   useEffect(() => {
     clipboardNoticeSet(null)
@@ -130,11 +155,11 @@ function App() {
             {clipboardNotice}
           </span>
           <button
-            className="button button--cta h-20 w-20 text-xl"
-            onClick={handleCopyPrompt}
+            className="button button--cta h-20 w-20"
+            onClick={handleSaveCopyPrompt}
             disabled={!prompt}
           >
-            Copy
+            Save & Copy
           </button>
         </div>
       </div>

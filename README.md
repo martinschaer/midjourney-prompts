@@ -6,10 +6,8 @@
 
 ## To-do
 
-- save previously used component values
 - autocomplete previously used component values
 - define components and options in a JSON file for easy update of rules
-- save prompts
 - group saved prompts in projects
 - attach generated image URLs to saved prompts
 - link to midjourney explore

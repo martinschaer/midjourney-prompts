@@ -1,12 +1,13 @@
 import { Router, Route, RootRoute } from '@tanstack/router'
 
-import App from './App.tsx'
+import App from './App'
 
 // ============================================================================
 // Route components
 // ============================================================================
-import About from './routes/About.tsx'
-import Index from './routes/Index.tsx'
+import About from './routes/About'
+import Collection from './routes/Collection'
+import Index from './routes/Index'
 // ============================================================================
 
 const rootRoute = new RootRoute({ component: App })
@@ -20,6 +21,12 @@ const aboutRoute = new Route({
   component: About,
 })
 
+const collectionRoute = new Route({
+  getParentRoute: () => rootRoute,
+  path: '/collection',
+  component: Collection,
+})
+
 const indexRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/',
@@ -28,7 +35,11 @@ const indexRoute = new Route({
 // ============================================================================
 
 // Router instance
-const routeTree = rootRoute.addChildren([aboutRoute, indexRoute])
+const routeTree = rootRoute.addChildren([
+  aboutRoute,
+  collectionRoute,
+  indexRoute,
+])
 export const router = new Router({ routeTree })
 
 // Router register for maximum type safety
